@@ -1,6 +1,73 @@
 {
- "years":[  {
+  "years":[  {
     "year": 2018,
+    "feasts":[
+      {
+      "feastName": "Sultán",
+      "feastWhen": "January182018180000"
+    },
+      {
+        "feastName": "Mulk",
+        "feastWhen": "February062018180000"
+      },
+      {
+        "feastName": "Alá",
+        "feastWhen": "March022018180000"
+      },
+      {
+        "feastName": "Bahá",
+        "feastWhen": "March212018180000"
+      },
+      {
+        "feastName": "Jalál",
+        "feastWhen": "April092018180000"
+      },
+      {
+        "feastName": "Jamál",
+        "feastWhen": "April282018180000"
+      },
+      {"feastName": "Azamat",
+      "feastWhen": "May172018180000"
+      },
+      {"feastName": "Núr",
+        "feastWhen": "June052018180000"
+      },
+      {"feastName": "Rahmat",
+        "feastWhen": "June242018180000"
+      },
+      {"feastName": "Kalimát",
+        "feastWhen": "July132018180000"
+      },
+      {"feastName": "Kamál",
+        "feastWhen": "August012018180000"
+      },
+      {"feastName": "Asmá",
+        "feastWhen": "August202018180000"
+      },
+      {"feastName": "Izzat",
+        "feastWhen": "September082018180000"
+      },
+      {"feastName": "Mashíyyat",
+        "feastWhen": "September272018180000"
+      },
+      {"feastName": "Ilm",
+        "feastWhen": "October162018180000"
+      },
+      {"feastName": "Qudrat",
+        "feastWhen": "November042018180000"
+      },
+      {"feastName": "Qawl",
+        "feastWhen": "November232018180000"
+      },
+      {"feastName": "Masá’il",
+        "feastWhen": "December122018180000"
+      },
+      {"feastName": "Sharaf",
+        "feastWhen": "December312018180000"
+      }],
+
+
+
     "holyDays": [
       {
         "holyDayName": "Naw-Rúz",

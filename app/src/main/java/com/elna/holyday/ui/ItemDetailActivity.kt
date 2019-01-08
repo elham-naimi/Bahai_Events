@@ -1,10 +1,11 @@
-package com.elna.kotlinfragment
+package com.elna.holyday.ui
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import com.elna.holyday.R
 import kotlinx.android.synthetic.main.activity_item_detail.*
 
 /**
@@ -13,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_item_detail.*
  * item details are presented side-by-side with a list of items
  * in a [ItemListActivity].
  */
+// TODO : To be implemented to show to detail view of the event, smaller screens
 class ItemDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

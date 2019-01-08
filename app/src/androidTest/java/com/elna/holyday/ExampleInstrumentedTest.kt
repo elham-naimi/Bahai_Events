@@ -1,4 +1,4 @@
-package com.elna.kotlinfragment
+package com.elna.holyday
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

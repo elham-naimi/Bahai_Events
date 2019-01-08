@@ -1,9 +1,10 @@
-package com.elna.holyday.ui
+package com.elna.holyday.ui.adapter
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.PagerAdapter
+import com.elna.holyday.ui.EventFragment
+import com.elna.holyday.ui.ItemListActivity
 
 class HolyDaysFragmentPagerAdapter(itemListActivity: ItemListActivity, supportFragmentManager: FragmentManager?) : FragmentPagerAdapter(supportFragmentManager) {
     override fun getItem(position: Int): Fragment {

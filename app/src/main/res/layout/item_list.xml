@@ -6,8 +6,9 @@
     android:name="com.elna.kotlinfragment.ItemListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".ItemListActivity"
-    tools:listitem="@layout/item_list_content" />
+    tools:context=".ui.ItemListActivity"
+    tools:listitem="@layout/list_item"
+    android:background="@color/colorWhiteTransparent"/>

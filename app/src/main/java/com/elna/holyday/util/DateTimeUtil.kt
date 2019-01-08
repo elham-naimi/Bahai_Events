@@ -1,6 +1,5 @@
 package com.elna.holyday.util
 
-import com.elna.holyday.db.HolyDaysForGivenYear
 import com.elna.holyday.model.HolyDay
 import org.json.JSONArray
 import org.json.JSONObject
@@ -67,20 +66,6 @@ class Util {
 
 }
 
-
-
-
-fun parseHolyDays(data: HolyDaysForGivenYear, year: Int): ArrayList<HolyDay> {
-
-    var holyDays = ArrayList<HolyDay>()
-    var jsonObject = JSONArray(data.holyDays)
-    for( i in 0 until jsonObject.length() ){
-        val formatter = DateTimeFormatter.ofPattern("MMMMddyyyyHHmmss")
-        val date : LocalDateTime = LocalDateTime.parse(((jsonObject.get(i) as JSONObject).get("holyDayWhen") as CharSequence?), formatter)
-        holyDays.add(HolyDay((jsonObject.get(i) as JSONObject).get("holyDayName") as String, ""))
-    }
-    return  holyDays;
-}
 
 /*
 

@@ -1,4 +1,4 @@
-package com.elna.holyday.ui
+package com.elna.holyday.ui.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import com.elna.holyday.R
 import com.elna.holyday.model.*
 import kotlinx.android.synthetic.main.list_item.view.*
-import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
 public class HolyDayListAdapter(val context: Context?, val onClickListener: View.OnClickListener) : RecyclerView.Adapter<ViewHolder>() {
@@ -31,7 +30,7 @@ public class HolyDayListAdapter(val context: Context?, val onClickListener: View
             holder?.eventName?.text = items?.get(position)?.name
             val formatter = DateTimeFormatter.ofPattern("MMMM dd yyyy")
             holder.eventDate.text = items?.get(position)?.date?.format(formatter)
-            Log.i(TAG, "name " + holder?.eventName?.text)
+            holder.daysLeft.text =  items?.get(position)?.daysleft.toString()
         }
 
     }
@@ -55,5 +54,6 @@ class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     // Holds the TextView that will add each animal to
     val eventName = view.textViewEventName
     val eventDate = view.textViewEventDate
+    val daysLeft = view.textViewEventDaysLeft
 
 }

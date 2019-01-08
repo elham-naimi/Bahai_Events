@@ -1,14 +1,15 @@
-package com.elna.kotlinfragment
+package com.elna.holyday.ui
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.elna.model.HolyDay
-import kotlinx.android.synthetic.main.activity_item_detail.*
+import com.elna.holyday.R
 import kotlinx.android.synthetic.main.item_detail.view.*
 
+
+// TODO : To be implemented to show to detail view of the event for larger screens
 /**
  * A fragment representing a single Item detail screen.
  * This fragment is either contained in a [ItemListActivity]

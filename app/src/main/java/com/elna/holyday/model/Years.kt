@@ -1,7 +1,7 @@
 package com.elna.holyday.model
 
-data class HolyDaysDatabase(
-        val years: List<Year>
+data class Years(
+        val years: ArrayList<Year>
 ){
-    constructor():this(emptyList())
+    constructor():this(ArrayList<Year>())
 }

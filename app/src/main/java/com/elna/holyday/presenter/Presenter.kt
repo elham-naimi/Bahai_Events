@@ -1,12 +1,11 @@
-package com.elna.presenter
+package com.elna.holyday.presenter
 
 import android.content.Context
 import android.util.Log
-import com.elna.datetime.DateTime
-import com.elna.db.HolyDayRepository
-import com.elna.db.HolyDaysDatabase
-import com.elna.db.HolyDaysForGivenYear
-import com.elna.model.HolyDay
+import com.elna.holyday.Constants
+import com.elna.holyday.datetime.DateTime
+import com.elna.holyday.model.*
+import com.elna.holyday.util.Util
 import io.reactivex.Flowable
 import io.reactivex.functions.BiFunction
 import kotlinx.coroutines.CoroutineScope
@@ -15,36 +14,54 @@ import org.json.JSONObject
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.temporal.ChronoUnit
+import java.util.*
+import kotlin.collections.ArrayList
 
 object Presenter : IPresenter {
 
-    private lateinit var repository: HolyDayRepository
-    init {
-        println("init complete")
+
+    @JvmField val TAG: String = Presenter::class.java.simpleName
+
+    // TODO : Update to return only upcoming 5 events
+    override fun getUpcomingEvents(years: Years): ArrayList<Event> {
+
+        val events : ArrayList<Event> =  ArrayList()
+
+        for(eventsForYear in years.years){
+         val year : Int = eventsForYear.year
+          for(feast in eventsForYear.feasts){
+              Log.i(TAG,"feast -> "+feast)
+              val formatter = DateTimeFormatter.ofPattern("MMMMddyyyyHHmmss")
+              val date : LocalDateTime = LocalDateTime.parse((feast.date as CharSequence?), formatter)
+              events.add(Event(feast.name,date,Constants.EVENT_FEAST, getDaysLeft(date)))
+          }
+          for(holyday in eventsForYear.holyDays){
+              val formatter = DateTimeFormatter.ofPattern("MMMMddyyyyHHmmss")
+              val date : LocalDateTime = LocalDateTime.parse((holyday.date as CharSequence?), formatter)
+              events.add(Event(holyday.name,date,Constants.EVENT_HOLYDAY, getDaysLeft(date)))
+          }
+        }
+        return events
     }
 
-    fun parseHolyDays(data: ArrayList<HolyDaysForGivenYear>): ArrayList<HolyDay> {
-
-        var holyDays = ArrayList<HolyDay>()
-        for (i in 0 until data.size) {
-            var jsonObject = JSONArray(data.get(i).holyDays)
-            for (i in 0 until jsonObject.length()) {
-                val formatter = DateTimeFormatter.ofPattern("MMMMddyyyyHHmmss")
-                val date: LocalDateTime = LocalDateTime.parse(((jsonObject.get(i) as JSONObject).get("holyDayWhen") as CharSequence?), formatter)
-                holyDays.add(HolyDay((jsonObject.get(i) as JSONObject).get("holyDayName") as String, date))
+    override fun filter(allYears : Years): Years {
+        var currUpcomingYears = Years()
+        for( year in allYears.years){
+            if(year.year == Util.getCurrentYear() || year.year == Util.getNextYear() ){
+                 currUpcomingYears.years.add(year)
             }
         }
-
-        return holyDays;
+        return currUpcomingYears
     }
+
 
     override fun getUpcomingHolyDayIndex(list : ArrayList<HolyDay>) : Int {
         val currentDate = DateTime.getInstance().getCurrentDateTime()
         var index = 0
         for (holyDay in list) {
-            if (currentDate.isBefore(holyDay.holyDayWhen)) {
+           /* if (currentDate.isBefore(holyDay.holyDayWhen)) {
                 break
-            }
+            }*/
             index++
         }
         return index
@@ -64,37 +81,5 @@ object Presenter : IPresenter {
         if (days < 0) days = 0
         return days
     }
-
-     fun queryUpcomingHolydays(app : Context, scope: CoroutineScope): Flowable<ArrayList<HolyDay>> {
-         var resultList = ArrayList<HolyDay>()
-
-         return queryCurrentAndNextYearHolydays(app,scope).map { data -> data }
-        /* return queryCurrentAndNextYearHolydays(app, scope).map { list ->
-             var index: Int = getUpcomingHolyDayIndex(list)
-             Log.i("TAG", "index+11" + (list[index].holyDayName))
-             for (i in index until index + 11) {
-                 list[i]?.let { resultList.add(list[i]) }
-             }
-             resultList
-
-         }*/
-     }
-
-
-     fun queryCurrentAndNextYearHolydays(app: Context, scope: CoroutineScope): Flowable<ArrayList<HolyDay>> {
-             val wordsDao = HolyDaysDatabase.getDatabase(app, scope).holyDayDao()
-
-             repository = HolyDayRepository(wordsDao)
-             return Flowable.zip(repository.queryCurrentYear(), repository.queryNextYear(), BiFunction<HolyDaysForGivenYear, HolyDaysForGivenYear, ArrayList<HolyDay>> { data1, data2 ->
-
-                 var list = ArrayList<HolyDaysForGivenYear>()
-                 list.add(data1)
-                 list.add(data2)
-                 Presenter.parseHolyDays(list)
-             })
-
-
-     }
-
 
 }
