@@ -12,7 +12,7 @@ class HolyDaysForGivenYear {
     @PrimaryKey
     var year: Int = 0
     @ColumnInfo(name = "ListData")
-    public @TypeConverters(Converters::class)
+  //  public @TypeConverters(Converters::class)
     var holyDays: String =""
 
 

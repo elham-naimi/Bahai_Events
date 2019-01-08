@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "901917283711",
+    "firebase_url": "https://bahaievents-d8598.firebaseio.com",
+    "project_id": "bahaievents-d8598",
+    "storage_bucket": "bahaievents-d8598.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:901917283711:android:39010398ca8ffd77",
+        "android_client_info": {
+          "package_name": "com.elna.holyday"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "901917283711-ual3v8rv5j7cv3fq7r09blc7pm0pn03c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuQC5NlF8d73wpEuW2QcZbwX53Razgixc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

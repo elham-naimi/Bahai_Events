@@ -1,8 +1,7 @@
-package com.elna.util
+package com.elna.holyday.util
 
-import android.util.Log
-import com.elna.db.HolyDaysForGivenYear
-import com.elna.model.HolyDay
+import com.elna.holyday.db.HolyDaysForGivenYear
+import com.elna.holyday.model.HolyDay
 import org.json.JSONArray
 import org.json.JSONObject
 import org.threeten.bp.LocalDateTime
@@ -23,47 +22,50 @@ val BICENTENARY_MONTH = 10
 
 val BICENTENARY_YEAR = 2019
 val NEXT_UPDATE_SECOND = 0
+class Util {
+    companion object {
+        fun getNextYear(): Int {
+            val calendar = Calendar.getInstance()
+            calendar.add(Calendar.YEAR, 1)
+            return calendar.get(Calendar.YEAR)
+        }
 
-public fun getCurrentTime(): Calendar {
-    return Calendar.getInstance()
+        fun getCurrentYear(): Int {
+            return Calendar.getInstance().get(Calendar.YEAR)
+        }
+    }
+    public fun getCurrentTime(): Calendar {
+        return Calendar.getInstance()
+    }
+
+    fun getDaysLeft(bicentenaryHolyDay: LocalDateTime?): Long {
+        if (bicentenaryHolyDay == null) return -1
+        val today = LocalDateTime.now()
+        var days = DAYS.between(today, bicentenaryHolyDay)
+        val minutes = MINUTES.between(today.plusDays(days), bicentenaryHolyDay)
+        if (minutes > 1)
+            days++
+        if (days < 0) days = 0
+        return days
+    }
+
+    private fun getBicentenaryHolyDate(): LocalDateTime {
+        return LocalDateTime.of(BICENTENARY_YEAR, BICENTENARY_MONTH, BICENTENARY_DAY,
+                BICENTENARY_HOUR, BICENTENARY_MINUTE, 0)
+    }
+
+    fun getLastHolyDayOfTheYear(): Calendar {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.MONTH, Calendar.NOVEMBER)
+        calendar.set(Calendar.DAY_OF_MONTH, 28)
+        calendar.set(Calendar.HOUR_OF_DAY, 18)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        return calendar
+    }
+
+
 }
-
-fun getDaysLeft(bicentenaryHolyDay: LocalDateTime?): Long {
-    if (bicentenaryHolyDay == null) return -1
-    val today = LocalDateTime.now()
-    var days = DAYS.between(today, bicentenaryHolyDay)
-    val minutes = MINUTES.between(today.plusDays(days), bicentenaryHolyDay)
-    if (minutes > 1)
-        days++
-    if (days < 0) days = 0
-    return days
-}
-
-private fun getBicentenaryHolyDate(): LocalDateTime {
-    return LocalDateTime.of(BICENTENARY_YEAR, BICENTENARY_MONTH, BICENTENARY_DAY,
-            BICENTENARY_HOUR, BICENTENARY_MINUTE, 0)
-}
-
-fun getLastHolyDayOfTheYear(): Calendar {
-    val calendar = Calendar.getInstance()
-    calendar.set(Calendar.MONTH, Calendar.NOVEMBER)
-    calendar.set(Calendar.DAY_OF_MONTH, 28)
-    calendar.set(Calendar.HOUR_OF_DAY, 18)
-    calendar.set(Calendar.MINUTE, 0)
-    calendar.set(Calendar.SECOND, 0)
-    return calendar
-}
-
-fun getNextYear(): Int {
-    val calendar = Calendar.getInstance()
-    calendar.add(Calendar.YEAR, 1)
-    return calendar.get(Calendar.YEAR)
-}
-
-fun getCurrentYear(): Int {
-    return Calendar.getInstance().get(Calendar.YEAR)
-}
-
 
 
 
@@ -75,7 +77,7 @@ fun parseHolyDays(data: HolyDaysForGivenYear, year: Int): ArrayList<HolyDay> {
     for( i in 0 until jsonObject.length() ){
         val formatter = DateTimeFormatter.ofPattern("MMMMddyyyyHHmmss")
         val date : LocalDateTime = LocalDateTime.parse(((jsonObject.get(i) as JSONObject).get("holyDayWhen") as CharSequence?), formatter)
-        holyDays.add(HolyDay((jsonObject.get(i) as JSONObject).get("holyDayName") as String, date))
+        holyDays.add(HolyDay((jsonObject.get(i) as JSONObject).get("holyDayName") as String, ""))
     }
     return  holyDays;
 }

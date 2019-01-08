@@ -2,14 +2,21 @@ package com.elna.viewmodel
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
+import com.elna.datetime.DateTime
 import com.elna.db.HolyDayRepository
+import com.elna.db.HolyDaysDatabase
+import com.elna.db.HolyDaysForGivenYear
 import com.elna.model.*
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
-import com.elna.db.HolyDaysDatabase
+import com.elna.presenter.Presenter
 import io.reactivex.Flowable
-import io.reactivex.Single
+import io.reactivex.functions.BiFunction
+import org.threeten.bp.LocalDateTime
 import kotlin.collections.ArrayList
+
+import org.threeten.bp.temporal.ChronoUnit.DAYS
+import org.threeten.bp.temporal.ChronoUnit.MINUTES
 
 public class HolyDayViewModel(private val app: Application) : AndroidViewModel(app) {
 
@@ -17,16 +24,20 @@ public class HolyDayViewModel(private val app: Application) : AndroidViewModel(a
     private val coroutineContext: CoroutineContext
         get() = parentJob + Dispatchers.Main
     private val scope = CoroutineScope(coroutineContext)
-    private lateinit var repository : HolyDayRepository
+
 
     fun loadHolyDays(): Flowable<ArrayList<HolyDay>> {
-         val wordsDao = HolyDaysDatabase.getDatabase(app, scope).holyDayDao()
-         repository = HolyDayRepository(wordsDao)
-         return repository.queryUpcomingHolidays()
-     }
+        return Presenter.queryUpcomingHolydays(app,scope)
+                .map { list-> list }
+
+    }
+
 
     override fun onCleared() {
         super.onCleared()
         parentJob.cancel()
     }
+
+
+
 }

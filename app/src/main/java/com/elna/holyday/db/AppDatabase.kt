@@ -13,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
+import java.io.File
 
 @Database(entities = arrayOf(HolyDaysForGivenYear::class), version = 1)
 
@@ -69,6 +70,7 @@ public abstract class HolyDaysDatabase : RoomDatabase() {
 
         private fun populateDatabase(holyDayDao: HolyDaysForGivenYearDao) {
 
+             context.applicationContext.resources.getResourceName(R.raw.holyday)
              var text  = context.applicationContext.resources.openRawResource(R.raw.holyday)
                     .bufferedReader().use { it.readText() }
              var array  : JSONArray = JSONObject(text).get("years") as JSONArray
