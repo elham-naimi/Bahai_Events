@@ -26,6 +26,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
         test.resources.srcDirs += 'src/test/elna.kotlinfragment/resources'
@@ -72,11 +73,11 @@ dependencies {
 
     // Gson
 
-    implementation 'com.google.code.gson:gson:2.8.5'
+   /* implementation 'com.google.code.gson:gson:2.8.5'
 
     debugCompile 'com.amitshekhar.android:debug-db:1.0.0'
 
-    // Date library
+  */  // Date library
 
     compile 'com.jakewharton.threetenabp:threetenabp:1.0.5'
 
@@ -93,7 +94,7 @@ dependencies {
     //testImplementation "io.mockk:mockk:"$mockk_version
     testCompile "io.mockk:mockk:1.8.13"
 
-    implementation 'org.apache.directory.studio:org.apache.commons.io:2.4'
+    //implementation 'org.apache.directory.studio:org.apache.commons.io:2.6'
     /*  test {
         useJUnitPlatform()
     }*/
