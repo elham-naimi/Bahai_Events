@@ -1,20 +1,12 @@
 package com.elna.holyday.presenter
 
-import android.content.Context
 import android.util.Log
 import com.elna.holyday.Constants
-import com.elna.holyday.datetime.DateTime
+import com.elna.holyday.util.DateTime
 import com.elna.holyday.model.*
-import com.elna.holyday.util.Util
-import io.reactivex.Flowable
-import io.reactivex.functions.BiFunction
-import kotlinx.coroutines.CoroutineScope
-import org.json.JSONArray
-import org.json.JSONObject
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.temporal.ChronoUnit
-import java.util.*
 import kotlin.collections.ArrayList
 
 object Presenter : IPresenter {
@@ -47,7 +39,8 @@ object Presenter : IPresenter {
     override fun filter(allYears : Years): Years {
         var currUpcomingYears = Years()
         for( year in allYears.years){
-            if(year.year == Util.getCurrentYear() || year.year == Util.getNextYear() ){
+            if(year.year == DateTime.getInstance().getCurrentYear() ||
+                    year.year ==DateTime.getInstance().getNextYear() ){
                  currUpcomingYears.years.add(year)
             }
         }

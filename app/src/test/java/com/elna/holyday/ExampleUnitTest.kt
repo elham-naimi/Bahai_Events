@@ -3,7 +3,7 @@ package com.elna.holyday
 
 
 import android.util.JsonReader
-import com.elna.holyday.datetime.DateTime
+import com.elna.holyday.util.DateTime
 import com.google.gson.JsonParser
 import io.mockk.every
 import io.mockk.junit5.MockKExtension
