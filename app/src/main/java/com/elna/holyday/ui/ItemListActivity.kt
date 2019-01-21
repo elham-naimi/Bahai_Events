@@ -1,5 +1,6 @@
 package com.elna.holyday.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.elna.holyday.R
@@ -34,6 +35,7 @@ class ItemListActivity : AppCompatActivity() {
 
         val tabLayout = findViewById(R.id.tabLayoutHolyDays) as TabLayout
         tabLayout.setupWithViewPager(viewPager)
+
 
     }
 }

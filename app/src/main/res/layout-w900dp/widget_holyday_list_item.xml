@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="2dp"
+    android:background="@drawable/holyday_widget_backgroud"
+    android:id="@+id/holyday_widget_layout">
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_weight="5"
+        android:paddingLeft="3dp"
+        android:layout_marginLeft="2dp"
+       android:gravity="center_vertical"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:id="@+id/imgholydayname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/imgwhen"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/imgholydayname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/layout_count"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/imgholydayname"
+
+        android:gravity="center">
+    <TextView
+        android:id="@+id/imgcount"
+        android:textSize="33sp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        ></TextView>
+
+    <TextView
+          android:id="@+id/imgdaysleft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgcount"
+        android:layout_centerHorizontal="true"
+        android:textSize="13sp"
+        android:includeFontPadding="false"
+
+        ></TextView>
+    </RelativeLayout>
+
+
+    <!--<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txtloading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Loading.."
+            android:gravity="center"/>
+    </RelativeLayout>-->
+</LinearLayout>

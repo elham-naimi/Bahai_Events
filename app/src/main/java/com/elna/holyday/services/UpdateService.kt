@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.support.v4.app.JobIntentService
 import android.util.Log
+import android.widget.RemoteViews
 
 
 class UpdateService : JobIntentService(), IService {
@@ -23,7 +24,7 @@ class UpdateService : JobIntentService(), IService {
 
 
     override fun widgetExists() : Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return true
     }
 
     override fun updateWidget() {

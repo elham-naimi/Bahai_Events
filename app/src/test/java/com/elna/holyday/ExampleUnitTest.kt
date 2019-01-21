@@ -3,12 +3,12 @@ package com.elna.holyday
 
 
 import android.util.JsonReader
+import com.elna.holyday.model.Event
 import com.elna.holyday.util.DateTime
 import com.google.gson.JsonParser
 import io.mockk.every
 import io.mockk.junit5.MockKExtension
 import io.mockk.mockkClass
-import org.apache.commons.io.IOUtils
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -34,52 +34,19 @@ import java.io.InputStreamReader
 class ExampleUnitTest {
 
 
-    var list = ArrayList<HolyDay>()
+    var list = ArrayList<Event>()
     @BeforeAll
     fun initHolyDays(){
-
         System.out.print(ExampleUnitTest::class.java.getResourceAsStream("holyday.json"))
         ExampleUnitTest::class.java!!.getClassLoader().javaClass
         val stream = ExampleUnitTest::class.java!!.getResourceAsStream("holyday.json")
-
-
-
-        //var stream : InputStream = getSystemResource("holyday.json").openStream()
-
-
-        val reader = JsonReader(InputStreamReader(stream, "UTF-8"))
-        val result = IOUtils.toString(stream, StandardCharsets.UTF_8)
-        val jsonParser = JsonParser()
-        val jsonObject = jsonParser.parse(
-                InputStreamReader(stream, "UTF-8")) as JSONObject
-        var array  : JSONArray = jsonObject.get("years") as JSONArray
-        for(i in 0 until array.length()){
-            var jsonObject =  array.get(i) as JSONObject
-            var data : JSONArray = jsonObject.get("holyDays") as JSONArray
-
-            for (i in 0 until data.length()) {
-                var jsonObject =  data[i] as JSONObject
-
-                    val formatter = DateTimeFormatter.ofPattern("MMMMddyyyyHHmmss")
-                    val date: LocalDateTime = LocalDateTime.parse((jsonObject.get("holyDayWhen") as CharSequence?), formatter)
-                    list.add(HolyDay((jsonObject).get("holyDayName") as String, date))
-                }
-            }
-
-        }
+    }
 
 
     @Test
     fun getUpcomingHolyDayIndex() {
-
         val car = mockkClass(DateTime::class)
         every { car.getCurrentDateTime() } returns LocalDateTime.now()
-
-
-        var list : ArrayList<HolyDay>
-
-       // list.add()
-      //  Presenter.getUpcomingHolyDayIndex()
         assertEquals(4, 2 + 2)
     }
 }

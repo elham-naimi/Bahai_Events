@@ -7,6 +7,7 @@ import com.elna.holyday.ui.EventFragment
 import com.elna.holyday.ui.ItemListActivity
 
 class HolyDaysFragmentPagerAdapter(itemListActivity: ItemListActivity, supportFragmentManager: FragmentManager?) : FragmentPagerAdapter(supportFragmentManager) {
+
     override fun getItem(position: Int): Fragment {
     var fragment = Fragment()
     fragment = EventFragment.newInstance(position)
